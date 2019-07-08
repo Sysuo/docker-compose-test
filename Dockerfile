@@ -9,6 +9,7 @@ RUN apt-get install -y apt-utils sudo curl net-tools iproute2 iputils-ping
 COPY . /app
 WORKDIR /app
 
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # ユーザを作成
