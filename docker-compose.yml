@@ -1,8 +1,16 @@
 version: "2"
 services:
+  server:
+    build: nginx
+    ports:
+      - "8001:8001"
+    volumes_from: 
+      - web
+    depends_on:
+      - web
   web:
     build: .
-    command: python ./test/manage.py runserver 0.0.0.0:8000
+    command: uwsgi --http :8000 --module test.wsgi
     ports:
       - "8000:8000"
     volumes: 
@@ -11,5 +19,3 @@ services:
       - redis
   redis:
     image: redis
-  nginx:
-    image: nginx
