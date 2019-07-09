@@ -1,4 +1,4 @@
-Django==2.0.6
+Django==2.0.12
 pytz==2019.1
 redis==2.10.6
 uwsgi==2.0.18
