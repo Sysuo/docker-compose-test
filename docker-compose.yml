@@ -3,19 +3,29 @@ services:
   server:
     build: nginx
     ports:
-      - "8001:8001"
+      - "8001:80"
     volumes_from: 
       - web
     depends_on:
       - web
+    networks:
+      - nginx_network
   web:
     build: .
-    command: uwsgi --http :8000 --module test.wsgi
-    ports:
-      - "8000:8000"
+    command: uwsgi --socket :8000 --module test.wsgi
     volumes: 
       - .:/app
     depends_on:
       - redis
+    networks:
+      - nginx_network
+      - redis_network
   redis:
     image: redis
+    networks:
+      - redis_network
+networks:
+  nginx_network:
+    driver: bridge
+  redis_network:
+    driver: bridge

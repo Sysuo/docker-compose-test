@@ -20,3 +20,5 @@ RUN pip install -r requirements.txt
 # ENV HOME /home/polaris
 # WORKDIR /home/polaris
 # USER polaris
+
+EXPOSE 8000
