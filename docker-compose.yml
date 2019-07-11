@@ -1,11 +1,13 @@
 version: "2"
 services:
   server:
-    build: nginx
+    build: ./config/nginx
     ports:
       - "8001:80"
-    volumes_from: 
-      - web
+    volumes: 
+      - ./config/nginx:/etc/nginx/site-available
+      - ./config/nginx:/app/config/nginx
+      - ./static:/app/static
     depends_on:
       - web
     networks:
